@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Independenx Fetchr — Same-Day Large-Item Delivery in Bakersfield</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            blue: '#1E3A8C',
+            navy: '#102266',
+            deep: '#0B1A4A',
+            gold: '#C9A24B',
+            goldlight: '#E6CB85',
+            ivory: '#FAF8F2'
+          }
+        },
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif']
+        },
+        boxShadow: {
+          card: '0 10px 30px -10px rgba(16, 34, 102, 0.18)',
+          soft: '0 4px 14px rgba(16, 34, 102, 0.08)'
+        }
+      }
+    }
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; color:#0B1A4A; }
+  .gold-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #C9A24B, transparent);
+  }
+  .gold-underline {
+    background: linear-gradient(90deg, #C9A24B, #E6CB85);
+    height: 3px;
+    width: 56px;
+    border-radius: 999px;
+  }
+  .hero-bg {
+    background:
+      radial-gradient(1200px 600px at 90% -10%, rgba(201,162,75,0.18), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(30,58,140,0.25), transparent 60%),
+      linear-gradient(135deg, #0B1A4A 0%, #1E3A8C 60%, #102266 100%);
+  }
+  .grid-pattern {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .logo-bulb {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #ffd0d0 0%, #ff2b2b 35%, #8a0000 100%);
+    box-shadow: 0 0 8px rgba(255,40,40,0.7);
+    position: relative;
+  }
+  .logo-bulb::before {
+    content:""; position:absolute; inset:-6px; border-radius:50%;
+    background: conic-gradient(from 0deg, transparent 0 10deg, rgba(255,255,255,0.0) 10deg 30deg);
+  }
+  .ray {
+    position:absolute; left:50%; top:50%; width:2px; height:8px;
+    background:#1E3A8C; transform-origin: center -2px;
+  }
+  .card-hover { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+  .card-hover:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -12px rgba(16,34,102,0.25); }
+  .btn-primary {
+    background: #1E3A8C; color:#fff; transition: all .2s ease;
+    box-shadow: 0 8px 20px -8px rgba(30,58,140,0.6);
+  }
+  .btn-primary:hover { background:#102266; transform: translateY(-1px); }
+  .btn-gold {
+    background: linear-gradient(135deg, #C9A24B 0%, #E6CB85 100%); color:#0B1A4A;
+    transition: all .2s ease;
+    box-shadow: 0 8px 20px -8px rgba(201,162,75,0.7);
+  }
+  .btn-gold:hover { filter: brightness(1.05); transform: translateY(-1px); }
+  .btn-outline {
+    border:1px solid rgba(255,255,255,0.3); color:#fff; transition: all .2s ease;
+  }
+  .btn-outline:hover { background:rgba(255,255,255,0.08); border-color:#C9A24B; }
+  details[open] summary .chev { transform: rotate(180deg); }
+  .chev { transition: transform .2s ease; }
+  .map-pin {
+    position:absolute; width:14px; height:14px; border-radius:50%;
+    background:#C9A24B; box-shadow:0 0 0 4px rgba(201,162,75,0.25), 0 0 0 10px rgba(201,162,75,0.12);
+    animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow:0 0 0 4px rgba(201,162,75,0.25), 0 0 0 10px rgba(201,162,75,0.12); }
+    50% { box-shadow:0 0 0 6px rgba(201,162,75,0.35), 0 0 0 14px rgba(201,162,75,0.05); }
+  }
+  .price-popular {
+    background: linear-gradient(180deg, #102266 0%, #1E3A8C 100%);
+    color:#fff;
+  }
+  .badge-gold {
+    background: linear-gradient(135deg, #C9A24B, #E6CB85);
+    color:#0B1A4A;
+  }
+  .glass {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+</style>
+</head>
+<body class="bg-white">
+
+<!-- NAV -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-100">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 h-18 py-4 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2">
+      <div class="relative">
+        <div class="logo-bulb"></div>
+      </div>
+      <span class="text-2xl font-extrabold tracking-tight text-brand-blue italic">independenx</span>
+      <span class="hidden sm:inline-block ml-1 text-xs font-semibold uppercase tracking-widest text-brand-gold border-l border-slate-200 pl-2">Fetchr</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-700">
+      <a href="#services" class="hover:text-brand-blue">Services</a>
+      <a href="#pricing" class="hover:text-brand-blue">Pricing</a>
+      <a href="#zones" class="hover:text-brand-blue">Service Zones</a>
+      <a href="#how" class="hover:text-brand-blue">How It Works</a>
+      <a href="#partners" class="hover:text-brand-blue">For Sellers</a>
+      <a href="#faq" class="hover:text-brand-blue">FAQ</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="#quote" class="hidden sm:inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold text-brand-blue border border-brand-blue/20 hover:bg-brand-blue/5">Get a Quote</a>
+      <a href="#book" class="btn-primary inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold">Book Delivery</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero-bg relative overflow-hidden text-white">
+  <div class="absolute inset-0 grid-pattern opacity-50"></div>
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-20 lg:py-28 relative">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs font-semibold tracking-wide">
+          <span class="w-2 h-2 rounded-full bg-brand-gold"></span>
+          PROUDLY SERVING BAKERSFIELD & KERN COUNTY
+        </div>
+        <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-tight">
+          Same-day delivery for the <span class="text-brand-goldlight">big stuff.</span>
+        </h1>
+        <p class="mt-6 text-lg text-blue-100/90 max-w-xl">
+          Independenx Fetchr moves furniture, appliances, and oversized items across Bakersfield — fast, insured, and tracked. Local drivers. Transparent pricing. No surprises.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#quote" class="btn-gold inline-flex items-center gap-2 px-6 py-3.5 rounded-lg font-bold">
+            Get a Quote
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#book" class="btn-outline inline-flex items-center gap-2 px-6 py-3.5 rounded-lg font-semibold">
+            Book Delivery
+          </a>
+        </div>
+
+        <!-- Trust badges -->
+        <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl">
+          <div class="glass rounded-xl p-3 text-center">
+            <div class="text-2xl font-extrabold text-brand-goldlight">4.9★</div>
+            <div class="text-[11px] uppercase tracking-wider text-blue-100/80">2,400+ reviews</div>
+          </div>
+          <div class="glass rounded-xl p-3 text-center">
+            <div class="text-2xl font-extrabold text-brand-goldlight">90 min</div>
+            <div class="text-[11px] uppercase tracking-wider text-blue-100/80">Avg. dispatch</div>
+          </div>
+          <div class="glass rounded-xl p-3 text-center">
+            <div class="text-2xl font-extrabold text-brand-goldlight">$25K</div>
+            <div class="text-[11px] uppercase tracking-wider text-blue-100/80">Cargo insured</div>
+          </div>
+          <div class="glass rounded-xl p-3 text-center">
+            <div class="text-2xl font-extrabold text-brand-goldlight">Local</div>
+            <div class="text-[11px] uppercase tracking-wider text-blue-100/80">Bakersfield-owned</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote card -->
+      <div id="quote" class="relative">
+        <div class="absolute -inset-3 bg-gradient-to-br from-brand-gold/30 to-transparent rounded-3xl blur-2xl"></div>
+        <div class="relative bg-white text-slate-800 rounded-2xl shadow-2xl p-7 border border-white/40">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-extrabold text-brand-deep">Instant Quote</h3>
+            <span class="badge-gold text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Same-Day</span>
+          </div>
+          <div class="gold-underline mt-2"></div>
+          <form class="mt-5 grid grid-cols-2 gap-4">
+            <div class="col-span-2 sm:col-span-1">
+              <label class="text-xs font-semibold text-slate-500 uppercase">Pickup ZIP</label>
+              <input type="text" placeholder="93301" class="mt-1 w-full px-3 py-2.5 rounded-lg border border-slate-200 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/15 outline-none">
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+              <label class="text-xs font-semibold text-slate-500 uppercase">Drop-off ZIP</label>
+              <input type="text" placeholder="93311" class="mt-1 w-full px-3 py-2.5 rounded-lg border border-slate-200 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/15 outline-none">
+            </div>
+            <div class="col-span-2">
+              <label class="text-xs font-semibold text-slate-500 uppercase">Item Type</label>
+              <select class="mt-1 w-full px-3 py-2.5 rounded-lg border border-slate-200 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/15 outline-none">
+                <option>Sofa / Sectional</option>
+                <option>Refrigerator / Appliance</option>
+                <option>Mattress & Box Spring</option>
+                <option>Dining Set</option>
+                <option>Other Large Item</option>
+              </select>
+            </div>
+            <div class="col-span-2">
+              <label class="text-xs font-semibold text-slate-500 uppercase">When?</label>
+              <div class="mt-1 grid grid-cols-3 gap-2 text-sm">
+                <button type="button" class="px-3 py-2 rounded-lg border border-brand-blue bg-brand-blue text-white font-semibold">ASAP</button>
+                <button type="button" class="px-3 py-2 rounded-lg border border-slate-200 hover:border-brand-blue">Today</button>
+                <button type="button" class="px-3 py-2 rounded-lg border border-slate-200 hover:border-brand-blue">Schedule</button>
+              </div>
+            </div>
+            <button type="button" class="col-span-2 btn-primary mt-2 py-3 rounded-lg font-bold">Calculate My Price</button>
+          </form>
+          <p class="text-[11px] text-slate-500 mt-3 text-center">Free quote • No signup required • Insured pickup</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold/60 to-transparent"></div>
+</section>
+
+<!-- LOGO STRIP -->
+<section class="border-b border-slate-100 bg-white">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-8">
+    <p class="text-center text-xs uppercase tracking-[0.25em] text-slate-400 font-semibold">Trusted by Bakersfield's leading retailers & marketplaces</p>
+    <div class="mt-6 flex flex-wrap justify-center items-center gap-x-12 gap-y-4 text-slate-400 font-bold text-lg">
+      <span>VALLEY FURNITURE</span>
+      <span class="text-slate-300">•</span>
+      <span>KERN APPLIANCE CO.</span>
+      <span class="text-slate-300">•</span>
+      <span>OILDALE OUTLET</span>
+      <span class="text-slate-300">•</span>
+      <span>BAKERSFIELD MARKETPLACE</span>
+      <span class="text-slate-300">•</span>
+      <span>SOUTHWEST HOME</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="py-20 lg:py-24 bg-brand-ivory/40">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="max-w-2xl">
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold">What we move</span>
+      <h2 class="mt-3 text-3xl md:text-4xl font-extrabold text-brand-deep">Built for the items rideshare won't touch.</h2>
+      <div class="gold-underline mt-4"></div>
+      <p class="mt-4 text-slate-600">From a single recliner to a full apartment refresh, our trained two-person crews handle the heavy lifting — literally.</p>
+    </div>
+
+    <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <!-- card -->
+      <div class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-soft">
+        <div class="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12V8a2 2 0 012-2h14a2 2 0 012 2v4M3 12v4a2 2 0 002 2h14a2 2 0 002-2v-4M3 12h18"/></svg>
+        </div>
+        <h3 class="mt-5 font-extrabold text-lg text-brand-deep">Furniture Delivery</h3>
+        <p class="mt-2 text-sm text-slate-600">Sofas, beds, sectionals, dining sets — wrapped, hauled, and placed in-room.</p>
+        <div class="mt-4 text-xs text-brand-gold font-bold uppercase tracking-wider">From $59</div>
+      </div>
+      <div class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-soft">
+        <div class="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M5 10h14M9 6h.01M9 14h.01"/></svg>
+        </div>
+        <h3 class="mt-5 font-extrabold text-lg text-brand-deep">Appliance Hauling</h3>
+        <p class="mt-2 text-sm text-slate-600">Refrigerators, washers, dryers, ranges. Disconnect-friendly with dolly + straps.</p>
+        <div class="mt-4 text-xs text-brand-gold font-bold uppercase tracking-wider">From $79</div>
+      </div>
+      <div class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-soft">
+        <div class="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7"/></svg>
+        </div>
+        <h3 class="mt-5 font-extrabold text-lg text-brand-deep">Marketplace Pickups</h3>
+        <p class="mt-2 text-sm text-slate-600">Bought it on FB Marketplace or OfferUp? We'll grab it and deliver it today.</p>
+        <div class="mt-4 text-xs text-brand-gold font-bold uppercase tracking-wider">From $49</div>
+      </div>
+      <div class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-soft">
+        <div class="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h13l3-7H6M3 17l-1-9h4M16 21a2 2 0 100-4 2 2 0 000 4zM8 21a2 2 0 100-4 2 2 0 000 4z"/></svg>
+        </div>
+        <h3 class="mt-5 font-extrabold text-lg text-brand-deep">Mini Moves</h3>
+        <p class="mt-2 text-sm text-slate-600">Studio relocations, dorm moves, single-room transfers across town.</p>
+        <div class="mt-4 text-xs text-brand-gold font-bold uppercase tracking-wider">From $129</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="py-20 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto">
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold">Transparent pricing</span>
+      <h2 class="mt-3 text-3xl md:text-4xl font-extrabold text-brand-deep">No hidden fees. Ever.</h2>
+      <div class="gold-underline mt-4 mx-auto"></div>
+      <p class="mt-4 text-slate-600">Flat rates by item size with optional add-ons. See your total before you book.</p>
+    </div>
+
+    <div class="mt-14 grid md:grid-cols-3 gap-6">
+      <!-- Tier 1 -->
+      <div class="card-hover bg-white rounded-2xl p-8 border border-slate-200 shadow-soft">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500">Express</h3>
+        <div class="mt-3 flex items-baseline gap-1">
+          <span class="text-5xl font-extrabold text-brand-deep">$59</span>
+          <span class="text-slate-500">/delivery</span>
+        </div>
+        <p class="mt-2 text-sm text-slate-600">Single small-to-medium item, single stop.</p>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li class="flex gap-2"><span class="text-brand-gold">✓</span> Up to 75 lbs / 1 item</li>
+          <li class="flex gap-2"><span class="text-brand-gold">✓</span> Within 10 miles</li>
+          <li class="flex gap-2"><span class="text-brand-gold">✓</span> Real-time GPS tracking</li>
+          <li class="flex gap-2"><span class="text-brand-gold">✓</span> $5K cargo insurance</li>
+        </ul>
+        <a href="#book" class="mt-8 block text-center w-full py-3 rounded-lg border-2 border-brand-blue text-brand-blue font-bold hover:bg-brand-blue hover:text-white transition">Choose Express</a>
+      </div>
+
+      <!-- Tier 2 -->
+      <div class="card-hover price-popular rounded-2xl p-8 shadow-card relative ring-2 ring-brand-gold/60">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 badge-gold text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Most Popular</span>
+        <h3 class="text-sm font-bold uppercase tracking-wider text-brand-goldlight">Standard</h3>
+        <div class="mt-3 flex items-baseline gap-1">
+          <span class="text-5xl font-extrabold">$129</span>
+          <span class="text-blue-200">/delivery</span>
+        </div>
+        <p class="mt-2 text-sm text-blue-100">Two-person crew + truck. Great for furniture & appliances.</p>
+        <ul class="mt-6 space-y-3 text-sm text-blue-50">
+          <li class="flex gap-2"><span class="text-brand-goldlight">✓</span> Up to 300 lbs / 3 items</li>
+          <li class="flex gap-2"><span class="text-brand-goldlight">✓</span> Within 25 miles</li>
+          <li class="flex gap-2"><span class="text-brand-goldlight">✓</span> In-room placement</li>
+          <li class="flex gap-2"><span class="text-brand-goldlight">✓</span> $15K cargo insurance</li>
+          <li class="flex gap-2"><span class="text-brand-goldlight">✓</span> Priority dispatch</li>
+        </ul>
+        <a href="#book" class="mt-8 block text-center w-full py-3 rounded-lg btn-gold font-bold">Choose Standard</a>
+      </div>
+
+      <!-- Tier 3 -->
+      <div class="card-hover bg-white rounded-2xl p-8 border border-slate-200 shadow-soft">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500">Heavy Haul</h3>
+        <div class="mt-3 flex items-baseline gap-1">
+          <span class="text-5xl font-extrabold text-brand-deep">$229</span>
+          <span class="text-slate-500">/delivery</span>
+        </div>
+        <p class="mt-2 text-sm text-slate-600">Big jobs, multi-room moves, or full appliance swaps.</p>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li class="flex gap-2"><span class="text-brand-gold">✓</span> Up to 800 lbs / unlimited items</li>
+          <li class="flex gap-2"><span class="text-brand-gold">✓</span> Within Kern County</li>
+          <li class="flex gap-2"><span class="text-brand-gold">✓</span> Disassembly + reassembly</li>
+          <li class="flex gap-2"><span class="text-brand-gold">✓</span> $25K cargo insurance</li>
+          <li class="flex gap-2"><span class="text-brand-gold">✓</span> Old-item haul-away</li>
+        </ul>
+        <a href="#book" class="mt-8 block text-center w-full py-3 rounded-lg border-2 border-brand-blue text-brand-blue font-bold hover:bg-brand-blue hover:text-white transition">Choose Heavy Haul</a>
+      </div>
+    </div>
+
+    <p class="mt-8 text-center text-sm text-slate-500">Need a custom rate for recurring deliveries? <a href="#partners" class="text-brand-blue font-semibold underline">Talk to our partner team →</a></p>
+  </div>
+</section>
+
+<!-- ZONES MAP -->
+<section id="zones" class="py-20 lg:py-24 bg-brand-ivory/40">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold">Service zones</span>
+      <h2 class="mt-3 text-3xl md:text-4xl font-extrabold text-brand-deep">Serving every corner of Bakersfield.</h2>
+      <div class="gold-underline mt-4"></div>
+      <p class="mt-4 text-slate-600">From Oildale to Tehachapi, our drivers know the shortcuts. Same-day windows available in core zones.</p>
+      <div class="mt-8 grid grid-cols-2 gap-3 text-sm">
+        <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-3 border border-slate-100"><span class="w-2 h-2 rounded-full bg-brand-gold"></span> Downtown Bakersfield</div>
+        <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-3 border border-slate-100"><span class="w-2 h-2 rounded-full bg-brand-gold"></span> Southwest / Seven Oaks</div>
+        <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-3 border border-slate-100"><span class="w-2 h-2 rounded-full bg-brand-gold"></span> Oildale</div>
+        <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-3 border border-slate-100"><span class="w-2 h-2 rounded-full bg-brand-gold"></span> Rosedale</div>
+        <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-3 border border-slate-100"><span class="w-2 h-2 rounded-full bg-brand-gold"></span> East Bakersfield</div>
+        <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-3 border border-slate-100"><span class="w-2 h-2 rounded-full bg-brand-gold"></span> Shafter & Wasco</div>
+        <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-3 border border-slate-100"><span class="w-2 h-2 rounded-full bg-brand-gold"></span> Delano</div>
+        <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-3 border border-slate-100"><span class="w-2 h-2 rounded-full bg-brand-gold"></span> Tehachapi (scheduled)</div>
+      </div>
+      <a href="#quote" class="mt-8 inline-flex items-center gap-2 text-brand-blue font-bold">Check your ZIP →</a>
+    </div>
+
+    <div class="relative aspect-[4/3] bg-white rounded-2xl shadow-card border border-slate-100 overflow-hidden">
+      <!-- Stylized map -->
+      <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="none">
+        <defs>
+          <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#E2E8F0" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="400" height="300" fill="url(#grid)"/>
+        <!-- Roads -->
+        <path d="M0 150 Q 100 140 200 160 T 400 150" stroke="#CBD5E1" stroke-width="2" fill="none"/>
+        <path d="M200 0 L 200 300" stroke="#CBD5E1" stroke-width="2" fill="none"/>
+        <path d="M0 100 L 400 220" stroke="#CBD5E1" stroke-width="1.5" fill="none"/>
+        <path d="M50 300 L 250 0" stroke="#CBD5E1" stroke-width="1.5" fill="none"/>
+        <!-- Service zone -->
+        <ellipse cx="200" cy="160" rx="150" ry="100" fill="#1E3A8C" opacity="0.08"/>
+        <ellipse cx="200" cy="160" rx="100" ry="65" fill="#C9A24B" opacity="0.12"/>
+        <ellipse cx="200" cy="160" rx="60" ry="40" fill="#1E3A8C" opacity="0.18"/>
+      </svg>
+      <!-- Pins -->
+      <div class="map-pin" style="top:48%; left:50%;"></div>
+      <div class="map-pin" style="top:34%; left:42%;"></div>
+      <div class="map-pin" style="top:60%; left:38%;"></div>
+      <div class="map-pin" style="top:55%; left:62%;"></div>
+      <div class="map-pin" style="top:30%; left:60%;"></div>
+      <div class="map-pin" style="top:70%; left:54%;"></div>
+
+      <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur rounded-xl px-4 py-3 shadow-soft border border-slate-100">
+        <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Coverage</div>
+        <div class="text-brand-deep font-extrabold">Greater Kern County</div>
+      </div>
+      <div class="absolute top-4 right-4 bg-brand-deep text-white rounded-xl px-3 py-2 text-xs font-bold shadow-soft">
+        Live drivers: <span class="text-brand-goldlight">24</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="py-20 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto">
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold">How it works</span>
+      <h2 class="mt-3 text-3xl md:text-4xl font-extrabold text-brand-deep">Booked in 60 seconds. Delivered today.</h2>
+      <div class="gold-underline mt-4 mx-auto"></div>
+    </div>
+
+    <div class="mt-14 grid md:grid-cols-4 gap-6 relative">
+      <div class="hidden md:block absolute top-8 left-[12%] right-[12%] h-px bg-gradient-to-r from-brand-gold/0 via-brand-gold to-brand-gold/0"></div>
+      <div class="relative text-center">
+        <div class="w-16 h-16 mx-auto rounded-full bg-white border-2 border-brand-gold flex items-center justify-center text-brand-deep font-extrabold text-xl shadow-soft relative z-10">1</div>
+        <h3 class="mt-5 font-extrabold text-brand-deep">Tell us what & where</h3>
+        <p class="mt-2 text-sm text-slate-600">Snap a photo or pick the item. Add pickup and drop-off addresses.</p>
+      </div>
+      <div class="relative text-center">
+        <div class="w-16 h-16 mx-auto rounded-full bg-white border-2 border-brand-gold flex items-center justify-center text-brand-deep font-extrabold text-xl shadow-soft relative z-10">2</div>
+        <h3 class="mt-5 font-extrabold text-brand-deep">Get an instant price</h3>
+        <p class="mt-2 text-sm text-slate-600">Flat rate locked. No surge pricing, no hourly meter.</p>
+      </div>
+      <div class="relative text-center">
+        <div class="w-16 h-16 mx-auto rounded-full bg-white border-2 border-brand-gold flex items-center justify-center text-brand-deep font-extrabold text-xl shadow-soft relative z-10">3</div>
+        <h3 class="mt-5 font-extrabold text-brand-deep">Track your driver</h3>
+        <p class="mt-2 text-sm text-slate-600">Live GPS, photo confirmations, and ETA texts at every step.</p>
+      </div>
+      <div class="relative text-center">
+        <div class="w-16 h-16 mx-auto rounded-full bg-brand-deep text-white flex items-center justify-center font-extrabold text-xl shadow-soft relative z-10 ring-4 ring-brand-gold/30">4</div>
+        <h3 class="mt-5 font-extrabold text-brand-deep">Delivered & placed</h3>
+        <p class="mt-2 text-sm text-slate-600">Crews place items in-room. You sign off and rate the run.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS / SELLER TOOLKIT -->
+<section id="partners" class="py-20 lg:py-24 bg-brand-deep text-white relative overflow-hidden">
+  <div class="absolute inset-0 grid-pattern opacity-30"></div>
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 relative grid lg:grid-cols-2 gap-12 items-center">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-brand-goldlight">For sellers & retailers</span>
+      <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">The delivery toolkit that closes sales.</h2>
+      <div class="gold-underline mt-4"></div>
+      <p class="mt-4 text-blue-100/90">Add same-day delivery at checkout, embed our quote widget, or hand off pickups via API. Increase conversions and stop losing customers at "how do I get this home?"</p>
+      <div class="mt-8 grid sm:grid-cols-2 gap-4">
+        <div class="glass rounded-xl p-5">
+          <div class="text-brand-goldlight font-extrabold">+34%</div>
+          <p class="text-sm text-blue-100/80 mt-1">avg. checkout conversion lift for furniture sellers</p>
+        </div>
+        <div class="glass rounded-xl p-5">
+          <div class="text-brand-goldlight font-extrabold">2 min</div>
+          <p class="text-sm text-blue-100/80 mt-1">to install our Shopify & WooCommerce widgets</p>
+        </div>
+        <div class="glass rounded-xl p-5">
+          <div class="text-brand-goldlight font-extrabold">API</div>
+          <p class="text-sm text-blue-100/80 mt-1">for marketplaces, dispatch, and reseller fleets</p>
+        </div>
+        <div class="glass rounded-xl p-5">
+          <div class="text-brand-goldlight font-extrabold">Net 30</div>
+          <p class="text-sm text-blue-100/80 mt-1">billing for verified business partners</p>
+        </div>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#" class="btn-gold inline-flex items-center px-6 py-3 rounded-lg font-bold">Become a Partner</a>
+        <a href="#" class="btn-outline inline-flex items-center px-6 py-3 rounded-lg font-semibold">View API Docs</a>
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="bg-white text-slate-800 rounded-2xl shadow-2xl p-6 border border-white/30">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Partner Dashboard</span>
+          <span class="badge-gold text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase">Live</span>
+        </div>
+        <div class="mt-5 grid grid-cols-3 gap-3 text-center">
+          <div class="bg-slate-50 rounded-lg py-3">
+            <div class="text-2xl font-extrabold text-brand-deep">128</div>
+            <div class="text-[10px] uppercase tracking-wider text-slate-500">This week</div>
+          </div>
+          <div class="bg-slate-50 rounded-lg py-3">
+            <div class="text-2xl font-extrabold text-brand-deep">98%</div>
+            <div class="text-[10px] uppercase tracking-wider text-slate-500">On-time</div>
+          </div>
+          <div class="bg-slate-50 rounded-lg py-3">
+            <div class="text-2xl font-extrabold text-brand-deep">$8,420</div>
+            <div class="text-[10px] uppercase tracking-wider text-slate-500">Saved fees</div>
+          </div>
+        </div>
+        <div class="mt-5 space-y-3">
+          <div class="flex items-center justify-between p-3 rounded-lg border border-slate-100">
+            <div>
+              <div class="text-sm font-bold text-brand-deep">Sectional Sofa → 93311</div>
+              <div class="text-xs text-slate-500">Driver: Marcus • ETA 14 min</div>
+            </div>
+            <span class="text-xs font-bold text-brand-gold">IN TRANSIT</span>
+          </div>
+          <div class="flex items-center justify-between p-3 rounded-lg border border-slate-100">
+            <div>
+              <div class="text-sm font-bold text-brand-deep">Refrigerator → 93309</div>
+              <div class="text-xs text-slate-500">Driver: Elena • Pickup at 3:40</div>
+            </div>
+            <span class="text-xs font-bold text-brand-blue">SCHEDULED</span>
+          </div>
+          <div class="flex items-center justify-between p-3 rounded-lg border border-slate-100">
+            <div>
+              <div class="text-sm font-bold text-brand-deep">Dining Set → 93312</div>
+              <div class="text-xs text-slate-500">Delivered • 4.9★ rated</div>
+            </div>
+            <span class="text-xs font-bold text-emerald-600">DONE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="py-20 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto">
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold">What Bakersfield is saying</span>
+      <h2 class="mt-3 text-3xl md:text-4xl font-extrabold text-brand-deep">Reliable, fast, and refreshingly local.</h2>
+      <div class="gold-underline mt-4 mx-auto"></div>
+    </div>
+
+    <div class="mt-14 grid md:grid-cols-3 gap-6">
+      <div class="card-hover bg-white rounded-2xl p-7 border border-slate-100 shadow-soft">
+        <div class="flex text-brand-gold">★★★★★</div>
+        <p class="mt-4 text-slate-700">"Bought a sectional on Marketplace at 11am. Independenx had it in my living room by 2pm. Two pros, no scratches, fair price."</p>
+        <div class="mt-6 flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-brand-blue to-brand-deep flex items-center justify-center text-white font-bold">JR</div>
+          <div>
+            <div class="font-bold text-brand-deep">Jasmine R.</div>
+            <div class="text-xs text-slate-500">Seven Oaks, Bakersfield</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-hover bg-white rounded-2xl p-7 border border-slate-100 shadow-soft">
+        <div class="flex text-brand-gold">★★★★★</div>
+        <p class="mt-4 text-slate-700">"We embedded their checkout widget and our weekend close rate jumped immediately. Customers love seeing 'today' as a real option."</p>
+        <div class="mt-6 flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-brand-gold to-brand-goldlight flex items-center justify-center text-brand-deep font-bold">DM</div>
+          <div>
+            <div class="font-bold text-brand-deep">Dan M.</div>
+            <div class="text-xs text-slate-500">Owner, Valley Furniture</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-hover bg-white rounded-2xl p-7 border border-slate-100 shadow-soft">
+        <div class="flex text-brand-gold">★★★★★</div>
+        <p class="mt-4 text-slate-700">"They delivered a fridge, hauled the old one, and were cheaper than the big-box delivery fee. This is the future of local logistics."</p>
+        <div class="mt-6 flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-white font-bold">AC</div>
+          <div>
+            <div class="font-bold text-brand-deep">Andre C.</div>
+            <div class="text-xs text-slate-500">Rosedale</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-20 lg:py-24 bg-brand-ivory/40">
+  <div class="max-w-4xl mx-auto px-5 lg:px-8">
+    <div class="text-center">
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold">Frequently asked</span>
+      <h2 class="mt-3 text-3xl md:text-4xl font-extrabold text-brand-deep">Quick answers.</h2>
+      <div class="gold-underline mt-4 mx-auto"></div>
+    </div>
+
+    <div class="mt-12 space-y-3">
+      <details class="group bg-white rounded-xl border border-slate-100 shadow-soft" open>
+        <summary class="flex items-center justify-between cursor-pointer p-5 font-bold text-brand-deep">
+          How fast is "same-day"?
+          <svg class="chev w-5 h-5 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-slate-600 text-sm">Most ASAP bookings are picked up within 90 minutes of confirmation. Schedule a window for arrivals as precise as a 30-minute slot.</div>
+      </details>
+      <details class="group bg-white rounded-xl border border-slate-100 shadow-soft">
+        <summary class="flex items-center justify-between cursor-pointer p-5 font-bold text-brand-deep">
+          What if my item gets damaged?
+          <svg class="chev w-5 h-5 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-slate-600 text-sm">Every delivery is insured up to $25K. Claims are filed in-app and resolved within 5 business days, guaranteed.</div>
+      </details>
+      <details class="group bg-white rounded-xl border border-slate-100 shadow-soft">
+        <summary class="flex items-center justify-between cursor-pointer p-5 font-bold text-brand-deep">
+          Do you deliver outside Bakersfield?
+          <svg class="chev w-5 h-5 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-slate-600 text-sm">Yes — we cover greater Kern County including Shafter, Wasco, Delano, and Tehachapi (scheduled). Long-haul quotes available on request.</div>
+      </details>
+      <details class="group bg-white rounded-xl border border-slate-100 shadow-soft">
+        <summary class="flex items-center justify-between cursor-pointer p-5 font-bold text-brand-deep">
+          Will the crew bring it inside and assemble?
+          <svg class="chev w-5 h-5 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-slate-600 text-sm">Standard and Heavy Haul include in-room placement. Add assembly/disassembly at booking — most jobs are flat-fee add-ons starting at $25.</div>
+      </details>
+      <details class="group bg-white rounded-xl border border-slate-100 shadow-soft">
+        <summary class="flex items-center justify-between cursor-pointer p-5 font-bold text-brand-deep">
+          How are your drivers vetted?
+          <svg class="chev w-5 h-5 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-slate-600 text-sm">All drivers are background-checked, trained on safe-lift technique, and carry commercial cargo insurance. Most are local, full-time team members.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="book" class="relative py-20 lg:py-24 overflow-hidden">
+  <div class="absolute inset-0 hero-bg"></div>
+  <div class="absolute inset-0 grid-pattern opacity-40"></div>
+  <div class="max-w-5xl mx-auto px-5 lg:px-8 relative text-center text-white">
+    <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs font-semibold tracking-wider">
+      <span class="w-2 h-2 rounded-full bg-brand-gold"></span>
+      READY WHEN YOU ARE
+    </span>
+    <h2 class="mt-6 text-4xl md:text-5xl font-extrabold leading-tight">Move it today. Pay a flat rate. Sleep easy tonight.</h2>
+    <p class="mt-5 text-lg text-blue-100/90 max-w-2xl mx-auto">Bakersfield's most-trusted same-day delivery for the items that matter. Get a free quote in seconds.</p>
+    <div class="mt-9 flex flex-wrap justify-center gap-3">
+      <a href="#quote" class="btn-gold inline-flex items-center gap-2 px-7 py-4 rounded-lg font-extrabold text-lg">
+        Get a Free Quote
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="tel:+16615550100" class="btn-outline inline-flex items-center gap-2 px-7 py-4 rounded-lg font-semibold text-lg">
+        Call (661) 555-0100
+      </a>
+    </div>
+    <div class="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-blue-100/80">
+      <span>✓ Insured & licensed</span>
+      <span>✓ Local Bakersfield team</span>
+      <span>✓ Flat-rate pricing</span>
+      <span>✓ Same-day available</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-brand-deep text-blue-100/80">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-14 grid md:grid-cols-4 gap-10">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-2">
+        <div class="logo-bulb"></div>
+        <span class="text-2xl font-extrabold tracking-tight text-white italic">independenx</span>
+        <span class="ml-1 text-xs font-semibold uppercase tracking-widest text-brand-goldlight border-l border-white/20 pl-2">Fetchr</span>
+      </div>
+      <p class="mt-4 text-sm max-w-md">Same-day, large-item delivery for Bakersfield and greater Kern County. Tech-enabled, insured, and proudly local.</p>
+      <div class="mt-6 flex gap-3">
+        <a href="#" class="w-9 h-9 rounded-lg glass flex items-center justify-center hover:bg-white/10">f</a>
+        <a href="#" class="w-9 h-9 rounded-lg glass flex items-center justify-center hover:bg-white/10">in</a>
+        <a href="#" class="w-9 h-9 rounded-lg glass flex items-center justify-center hover:bg-white/10">x</a>
+        <a href="#" class="w-9 h-9 rounded-lg glass flex items-center justify-center hover:bg-white/10">ig</a>
+      </div>
+    </div>
+    <div>
+      <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Company</h4>
+      <ul class="space-y-2 text-sm">
+        <li><a href="#" class="hover:text-white">About</a></li>
+        <li><a href="#" class="hover:text-white">Careers — drive with us</a></li>
+        <li><a href="#partners" class="hover:text-white">Partners</a></li>
+        <li><a href="#" class="hover:text-white">Press</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Support</h4>
+      <ul class="space-y-2 text-sm">
+        <li><a href="#faq" class="hover:text-white">FAQ</a></li>
+        <li><a href="#" class="hover:text-white">Contact</a></li>
+        <li><a href="#" class="hover:text-white">Insurance & claims</a></li>
+        <li><a href="#" class="hover:text-white">Terms & Privacy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-5 flex flex-col sm:flex-row justify-between gap-3 text-xs text-blue-100/60">
+      <span>© 2025 Independenx Fetchr LLC. Bakersfield, CA. All rights reserved.</span>
+      <span>Made in Kern County 🛻</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
